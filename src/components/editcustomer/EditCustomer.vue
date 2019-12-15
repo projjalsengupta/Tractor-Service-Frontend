@@ -27,6 +27,14 @@
         />
         <EditInvoice v-else :customer.sync="customer" :editInvoiceOpen.sync="editInvoiceOpen" />
       </div>
+      <div v-if="tractorDetailsVisible">
+        <ShowTractorDetails
+          v-if="!editTractorDetailsOpen"
+          :customer.sync="customer"
+          :editTractorDetailsOpen.sync="editTractorDetailsOpen"
+        />
+        <EditTractorDetails v-else :customer.sync="customer" :editTractorDetailsOpen.sync="editTractorDetailsOpen" />
+      </div>
       <v-bottom-navigation app v-model="bottomNav" color="primary" grow>
         <v-btn value="booking" v-on:click="openBooking">
           <span>Booking</span>
@@ -40,6 +48,10 @@
           <span>Invoice</span>
           <v-icon>mdi-newspaper</v-icon>
         </v-btn>
+        <v-btn value="tractordetails" v-on:click="openTractorDetails">
+          <span>Tractor details</span>
+          <v-icon>mdi-tractor</v-icon>
+        </v-btn>
       </v-bottom-navigation>
     </div>
     <div class="text-center" v-else>
@@ -49,12 +61,14 @@
 </template>
 
 <script>
-import ShowBooking from "./ShowBooking.vue";
-import EditBooking from "./EditBooking.vue";
-import ShowDelivery from "./ShowDelivery.vue";
-import EditDelivery from "./EditDelivery.vue";
-import ShowInvoice from "./ShowInvoice.vue";
-import EditInvoice from "./EditInvoice.vue";
+import ShowBooking from "./booking/ShowBooking.vue";
+import EditBooking from "./booking/EditBooking.vue";
+import ShowDelivery from "./delivery/ShowDelivery.vue";
+import EditDelivery from "./delivery/EditDelivery.vue";
+import ShowInvoice from "./invoice/ShowInvoice.vue";
+import EditInvoice from "./invoice/EditInvoice.vue";
+import ShowTractorDetails from "./tractordetails/ShowTractorDetails.vue";
+import EditTractorDetails from "./tractordetails/EditTractorDetails.vue";
 
 export default {
   name: "EditCustomer",
@@ -64,7 +78,9 @@ export default {
     EditDelivery,
     ShowDelivery,
     EditInvoice,
-    ShowInvoice
+    ShowInvoice,
+    EditTractorDetails,
+    ShowTractorDetails
   },
   data: function() {
     return {
@@ -74,10 +90,12 @@ export default {
       bookingVisible: true,
       deliveryVisible: false,
       invoiceVisible: false,
+      tractorDetailsVisible: false,
       bottomNav: "booking",
       editBookingOpen: false,
       editDeliveryOpen: false,
-      editInvoiceOpen: false
+      editInvoiceOpen: false,
+      editTractorDetailsOpen: false
     };
   },
   methods: {
@@ -85,16 +103,25 @@ export default {
       this.bookingVisible = true;
       this.deliveryVisible = false;
       this.invoiceVisible = false;
+      this.tractorDetailsVisible = false;
     },
     openDelivery: function() {
       this.bookingVisible = false;
       this.deliveryVisible = true;
       this.invoiceVisible = false;
+      this.tractorDetailsVisible = false;
     },
     openInvoice: function() {
       this.bookingVisible = false;
       this.deliveryVisible = false;
       this.invoiceVisible = true;
+      this.tractorDetailsVisible = false;
+    },
+    openTractorDetails: function() {
+      this.bookingVisible = false;
+      this.deliveryVisible = false;
+      this.invoiceVisible = false;
+      this.tractorDetailsVisible = true;
     }
   },
   beforeCreate: function() {

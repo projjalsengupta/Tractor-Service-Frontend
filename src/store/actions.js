@@ -173,6 +173,27 @@ export default () => ({
         });
         return response;
     },
+    async editTractorDetails({ state }, { customerId, payload }) {
+        Vue.http.options.emulateJSON = true;
+        var response = {
+            error: false,
+            body: null
+        };
+        await Vue.http.post(state.api + "customer/" + customerId + "/tractor-details",
+            payload, {
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'x-auth-token': localStorage.getItem("token")
+                }
+            }).then((result) => {
+            response.error = false;
+            response.body = result.body;
+        }).catch((result) => {
+            response.error = true;
+            response.body = result.body;
+        });
+        return response;
+    },
     async getAllCustomers({ state }, { showBy, pageNo, pageSize, sortBy, sortOrder, name, nickName, sonOf, village, challanNo, mobile, whatsapp }) {
         Vue.http.options.emulateJSON = true;
         var response = {
@@ -215,19 +236,6 @@ export default () => ({
         if (whatsapp == null) {
             whatsapp = "";
         }
-        console.log(state.api + "customer/all?" +
-            "showBy=" + showBy +
-            "&pageNo=" + pageNo +
-            "&pageSize=" + pageSize +
-            "&sortBy=" + sortBy +
-            "&sortOrder=" + sortOrder +
-            "&name=" + name +
-            "&nickName=" + nickName +
-            "&sonOf=" + sonOf +
-            "&village=" + village +
-            "&challanNo=" + challanNo +
-            "&mobile=" + mobile +
-            "&whatsapp=" + whatsapp);
         await Vue.http.get(state.api + "customer/all?" +
             "showBy=" + showBy +
             "&pageNo=" + pageNo +

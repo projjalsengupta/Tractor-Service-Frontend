@@ -206,6 +206,9 @@ export default {
       mobile: "",
       whatsapp: "",
       challan: "",
+      tractorModelNo: "",
+      tractorEngineNo: "",
+      tractorChasisNo: "",
       bookingnameRules: [
         v => !!v || "Booking name is required",
         v => v.length <= 30 || "Booking name must be less than 30 characters"
@@ -216,6 +219,18 @@ export default {
       sonofRules: [
         v => !!v || "Son of field is required",
         v => v.length <= 30 || "Son of field must be less than 30 characters"
+      ],
+      tractorModelNoRules: [
+        v => !!v || "Tractor model number of field is required",
+        v => v.length <= 30 || "Tractor model number of field must be less than 30 characters"
+      ],
+      tractorEngineNoRules: [
+        v => !!v || "Tractor engine number of field is required",
+        v => v.length <= 30 || "Tractor engine number of field must be less than 30 characters"
+      ],
+      tractorChasisNoRules: [
+        v => !!v || "Tractor chasis number of field is required",
+        v => v.length <= 30 || "Tractor chasis number of field must be less than 30 characters"
       ],
       villageRules: [
         v => !!v || "Village is required",
@@ -363,7 +378,7 @@ export default {
             dist: this.dist,
             mobile: this.mobile,
             whatsapp: this.whatsapp,
-            challanNo: this.challan
+            challanNo: this.challan,
           }
         })
         .then(response => {
