@@ -16,9 +16,6 @@ export default {
     setSnackbarText(state, { snackbarText }) {
         state.snackbarText = snackbarText;
     },
-    setIsDrawerOpen(state, { isDrawerOpen }) {
-        state.isDrawerOpen = isDrawerOpen;
-    },
     setSnackbarVisibility(state, { visible }) {
         state.snackbar = visible;
         if (!visible) {

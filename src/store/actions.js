@@ -87,6 +87,27 @@ export default () => ({
         });
         return response;
     },
+    async editFinalCalculation({ state }, { customerId, payload }) {
+        Vue.http.options.emulateJSON = true;
+        var response = {
+            error: false,
+            body: null
+        };
+        await Vue.http.post(state.api + "customer/" + customerId + "/final-calculation",
+            payload, {
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'x-auth-token': localStorage.getItem("token")
+                }
+            }).then((result) => {
+            response.error = false;
+            response.body = result.body;
+        }).catch((result) => {
+            response.error = true;
+            response.body = result.body;
+        });
+        return response;
+    },
     async editDelivery({ state }, { customerId, payload }) {
         Vue.http.options.emulateJSON = true;
         var response = {

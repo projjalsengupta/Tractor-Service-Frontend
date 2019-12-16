@@ -1,6 +1,5 @@
 <template>
   <v-app-bar color="primary" dark app>
-    <v-app-bar-nav-icon v-on:click="toggleNavigationDrawer"></v-app-bar-nav-icon>
     <v-toolbar-title>Tractor service</v-toolbar-title>
     <v-spacer></v-spacer>
     <v-btn text v-on:click="logout">Logout</v-btn>
@@ -22,11 +21,6 @@ export default {
       });
       this.$store.commit("setSnackbarVisibility", {
         visible: true
-      });
-    },
-    toggleNavigationDrawer: function() {
-      this.$store.commit("setIsDrawerOpen", {
-        isDrawerOpen: !this.$store.state.isDrawerOpen
       });
     }
   }

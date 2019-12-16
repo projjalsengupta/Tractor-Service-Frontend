@@ -8,7 +8,11 @@
     </v-toolbar>
     <div v-if="!loading">
       <div v-if="bookingVisible">
-        <ShowBooking v-if="!editBookingOpen" :customer.sync="customer" :editBookingOpen.sync="editBookingOpen" />
+        <ShowBooking
+          v-if="!editBookingOpen"
+          :customer.sync="customer"
+          :editBookingOpen.sync="editBookingOpen"
+        />
         <EditBooking v-else :customer.sync="customer" :editBookingOpen.sync="editBookingOpen" />
       </div>
       <div v-if="deliveryVisible">
@@ -33,7 +37,14 @@
           :customer.sync="customer"
           :editTractorDetailsOpen.sync="editTractorDetailsOpen"
         />
-        <EditTractorDetails v-else :customer.sync="customer" :editTractorDetailsOpen.sync="editTractorDetailsOpen" />
+        <EditTractorDetails
+          v-else
+          :customer.sync="customer"
+          :editTractorDetailsOpen.sync="editTractorDetailsOpen"
+        />
+      </div>
+      <div v-if="transactionVisible">
+        <Transaction :customer.sync="customer" />
       </div>
       <v-bottom-navigation app v-model="bottomNav" color="primary" grow>
         <v-btn value="booking" v-on:click="openBooking">
@@ -49,8 +60,12 @@
           <v-icon>mdi-newspaper</v-icon>
         </v-btn>
         <v-btn value="tractordetails" v-on:click="openTractorDetails">
-          <span>Tractor details</span>
+          <span>Tractor</span>
           <v-icon>mdi-tractor</v-icon>
+        </v-btn>
+        <v-btn value="transaction" v-on:click="openTransaction">
+          <span>Transaction</span>
+          <v-icon>mdi-bank-transfer</v-icon>
         </v-btn>
       </v-bottom-navigation>
     </div>
@@ -69,6 +84,7 @@ import ShowInvoice from "./invoice/ShowInvoice.vue";
 import EditInvoice from "./invoice/EditInvoice.vue";
 import ShowTractorDetails from "./tractordetails/ShowTractorDetails.vue";
 import EditTractorDetails from "./tractordetails/EditTractorDetails.vue";
+import Transaction from "./transaction/Transaction.vue";
 
 export default {
   name: "EditCustomer",
@@ -80,7 +96,8 @@ export default {
     EditInvoice,
     ShowInvoice,
     EditTractorDetails,
-    ShowTractorDetails
+    ShowTractorDetails,
+    Transaction
   },
   data: function() {
     return {
@@ -91,6 +108,7 @@ export default {
       deliveryVisible: false,
       invoiceVisible: false,
       tractorDetailsVisible: false,
+      transactionVisible: false,
       bottomNav: "booking",
       editBookingOpen: false,
       editDeliveryOpen: false,
@@ -104,24 +122,35 @@ export default {
       this.deliveryVisible = false;
       this.invoiceVisible = false;
       this.tractorDetailsVisible = false;
+      this.transactionVisible = false;
     },
     openDelivery: function() {
       this.bookingVisible = false;
       this.deliveryVisible = true;
       this.invoiceVisible = false;
       this.tractorDetailsVisible = false;
+      this.transactionVisible = false;
     },
     openInvoice: function() {
       this.bookingVisible = false;
       this.deliveryVisible = false;
       this.invoiceVisible = true;
       this.tractorDetailsVisible = false;
+      this.transactionVisible = false;
     },
     openTractorDetails: function() {
       this.bookingVisible = false;
       this.deliveryVisible = false;
       this.invoiceVisible = false;
       this.tractorDetailsVisible = true;
+      this.transactionVisible = false;
+    },
+    openTransaction: function() {
+      this.bookingVisible = false;
+      this.deliveryVisible = false;
+      this.invoiceVisible = false;
+      this.tractorDetailsVisible = false;
+      this.transactionVisible = true;
     }
   },
   beforeCreate: function() {

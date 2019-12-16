@@ -82,7 +82,7 @@
       <v-row>
         <v-spacer />
         <v-btn class="ml-2 mr-2" large color="accent" rounded v-on:click="updateEditInvoiceOpen">
-          <v-icon left>edit</v-icon>Edit Invoice
+          <v-icon left>edit</v-icon>Edit
         </v-btn>
       </v-row>
     </v-container>
