@@ -7,7 +7,7 @@
             <v-icon left color="accent">mdi-calculator</v-icon>Final Calculation
           </v-chip>
         </v-row>
-        <v-row>
+        <v-row class="mt-2">
           <v-col v-for="field in fields" cols="6" md="2" :key="field.name" class="mb-n1">
             <v-text-field
               v-model="field.value"
